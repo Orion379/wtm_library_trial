@@ -43,10 +43,9 @@ def registration_view(request):
     if request.method == "POST":
         registration_form = RegistrationForm(request.POST)
         if registration_form.is_valid():
-            create_user=registration_form.save()
-            create_user.save()
+            create_user = registration_form.save()
             UserProfile.objects.create(user=create_user)
-            messages.success(request,"Successfully created acccount, Try Logging In")
+            messages.success(request, "Successfully created account. Try logging in.")
             return redirect("accounts:login")
     else:
         registration_form = RegistrationForm()

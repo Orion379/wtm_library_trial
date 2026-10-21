@@ -18,6 +18,12 @@
 
         <form method="POST" class="space-y-4">
             {% csrf_token %}
+            
+            {% if register.errors %}
+            <div class="text-red-600 text-sm mb-4">
+                {{ register.errors }}
+            </div>
+                {% endif %}
             <div>
                 <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Username</label>
                 {{register.username}}
@@ -34,14 +40,23 @@
                 <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Last Name</label>
                 {{register.last_name}}
             </div>
-            <div>
-                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Enter Password</label>
-                {{register.password1}}
-            </div>
-            <div>
-                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Re-Enter Password</label>
-                {{register.password1}}
-            </div>
+            
+<div>
+    <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
+        Enter Password
+    </label>
+    {{ register.password1 }}
+    {{ register.password1.errors }}
+</div>
+
+<div>
+    <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
+        Re-Enter Password
+    </label>
+    {{ register.password2 }}
+    {{ register.password2.errors }}
+</div>
+
             <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded-xl shadow-lg transition-all">Sign In</button>
         </form>
         <p class="text-center text-xs text-slate-500 mt-6">Need an account? <a href="{% url 'accounts:registration' %}" class="text-indigo-600 font-semibold hover:underline">Register</a></p>
